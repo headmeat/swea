@@ -1,0 +1,56 @@
+T = int(input())
+for test_case in range(1, T):
+    N = int(input())
+    t = [0] * (N*N)
+    ch=True
+    hor, ver = True, True
+    horizon, vertical=0, 0
+    lim = [1,1]
+    idx, i=0, 1
+
+    while i<(N*N+1):
+        if ch:
+            if horizon<N:
+                if hor:
+                    t[idx]=i
+                    idx+=1
+                else:
+                    t[idx]=i
+                    idx-=1
+                horizon+=1
+            else:
+                vertical = lim[1]
+                lim[1] += 1
+                ch=False
+                i-=1
+                if ver:
+                    idx+=N-1
+                else:
+                    idx-=N-1
+                hor = not hor
+        else:
+            if vertical<N:
+                if ver:
+                    t[idx]=i
+                    idx+=N
+                else:
+                    t[idx]=i
+                    idx-=N
+                vertical+=1
+            else:
+                horizon = lim[0]
+                lim[0] += 1
+                ch=True
+                i-=1
+                if hor:
+                    idx+=N+1
+                else:
+                    idx-=N+1
+                ver = not ver
+        i+=1
+    print("#{}".format(test_case))
+    for i in range(N*N):
+        if (i%N==0) and (i>0):
+            print()
+        print(t[i], end=" ")
+    print()
