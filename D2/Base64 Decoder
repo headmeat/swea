@@ -1,0 +1,9 @@
+T = int(input())
+
+for test_case in range(1, T+1):
+    ang, dic = "", {"+":-19, "/":-16}
+
+    for alp in input():
+        ang += '{0:06b}'.format(ord(alp) - (65 if alp.isupper() else (71 if alp.islower() else (-4 if alp.isnumeric() else dic[alp]))))
+    res = "".join([chr(int(j, 2)) for j in [ang[i:i+8] for i in range(0, len(ang), 8)]])
+    print(f"#{test_case} {res}")
