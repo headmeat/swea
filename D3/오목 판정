@@ -1,0 +1,24 @@
+T = int(input())
+dx, dy = [-1,-1,1,1], [-1,1,1,-1]
+ 
+def cons(lst):
+    count = 0
+    for i in lst:
+        count = count+1 if i=="o" else 0
+        if count>=5: return True
+    return False
+ 
+for test_case in range(1, T + 1):
+    N = int(input())
+    mat = [list(input()) for i in range(N)]
+ 
+    try:
+        for n in range(len(mat)):
+            if (cons([x for i, x in enumerate(mat[n])]) or cons([x for i, x in enumerate([j[n] for j in mat])])): raise Exception()
+ 
+            for i in [i for i, x in enumerate(mat[n]) if x == "o"]:
+                for k in range(len(dx)):
+                    if cons([mat[n+dx[k]*step][i+dy[k]*step] for step in range(N) if (0<=n+dx[k]*step<N and 0<=i+dy[k]*step<N)]): raise Exception()
+        print(f"#{test_case} NO")
+    except Exception: 
+        print(f"#{test_case} YES")
